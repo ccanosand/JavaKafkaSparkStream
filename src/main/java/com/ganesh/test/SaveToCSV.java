@@ -70,23 +70,15 @@ public class SaveToCSV {
                 "employee.lastName, employee.addresses from employeesData1");
         allRecords.createOrReplaceTempView("allRecordsView");
 
-        Dataset<Row> explodedRecords = allRecords.withColumn(
-                "address",
-                org.apache.spark.sql.functions.explode(allRecords.col("addresses"))
-        );
-
-        explodedRecords.show();
+        Dataset<Row> explodedRecords = allRecords.withColumn( "address",
+                org.apache.spark.sql.functions.explode(allRecords.col("addresses")));
         explodedRecords.createOrReplaceTempView("explodedView");
 
-        sqlCtx.sql("select id, objectConvertor(address) from explodedView").show();
-                //.withColumn("address", explodedRecords.col("address").cast(DataTypes.StringType)).show();
-
-
-        /*sqlCtx.sql("select id, firstname, lastname from allRecordsView").
+        sqlCtx.sql("select id, firstname, lastname from allRecordsView").
                 write().format("com.databricks.spark.csv").save("table1.csv");
 
-        sqlCtx.sql("select id, address from explodedView").
-                write().format("com.databricks.spark.csv").save("table2.csv");*/
+        sqlCtx.sql("select id, objectConvertor(address) from explodedView").
+                write().format("com.databricks.spark.csv").save("table2.csv");
 
         sparkSession.close();
     }
