@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Mon Jul 24 10:31:30 PDT 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-015d-75a7-62e7-00000da80fe8 
-on database directory /home/cloudera/IdeaProjects/sparkjava/metastore_db with class loader org.apache.spark.sql.hive.client.IsolatedClientLoader$$anon$1@30272916 
+Tue Jul 25 08:33:48 PDT 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-015d-7a61-fbc0-00000e5fa318 
+on database directory /home/cloudera/works/JsonHive/metastore_db with class loader org.apache.spark.sql.hive.client.IsolatedClientLoader$$anon$1@6650813a 
 Loaded from file:/home/cloudera/.m2/repository/org/apache/derby/derby/10.10.2.0/derby-10.10.2.0.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_141-b15
-user.dir=/home/cloudera/IdeaProjects/sparkjava
+user.dir=/home/cloudera/works/JsonHive
 os.name=Linux
 os.arch=amd64
 os.version=2.6.32-573.el6.x86_64

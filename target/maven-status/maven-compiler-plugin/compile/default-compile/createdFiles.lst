@@ -1,2 +1,8 @@
+com/ganesh/test/SaveToCSV.class
+com/ganesh/test/SaveToCSV$2.class
 com/ganesh/test/WordCountTask.class
+com/ganesh/test/ConnectToHive.class
+com/ganesh/test/SaveToCSV$3.class
+com/ganesh/test/SaveToCSV$1.class
+com/ganesh/test/JsonToHive$1.class
 com/ganesh/test/JsonToHive.class
