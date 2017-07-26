@@ -2,6 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="90c21b51-57c1-4092-9f3a-98cfb0f30567" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/ganesh/test/GUPStructure.class" afterPath="$PROJECT_DIR$/target/classes/com/ganesh/test/GUPStructure.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/ganesh/test/GupLoader.class" afterPath="$PROJECT_DIR$/target/classes/com/ganesh/test/GupLoader.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gupProfiles-copy.json" afterPath="$PROJECT_DIR$/gupProfiles-copy.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gupProfiles.json" afterPath="$PROJECT_DIR$/gupProfiles.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ganesh/test/GUPStructure.java" afterPath="$PROJECT_DIR$/src/main/java/com/ganesh/test/GUPStructure.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ganesh/test/GupLoader.java" afterPath="$PROJECT_DIR$/src/main/java/com/ganesh/test/GupLoader.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -14,25 +20,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GUPStructure.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/ganesh/test/GUPStructure.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="263">
-              <caret line="51" column="92" lean-forward="false" selection-start-line="51" selection-start-column="92" selection-end-line="51" selection-end-column="92" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="GupLoader.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/ganesh/test/GupLoader.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="154">
-              <caret line="32" column="53" lean-forward="true" selection-start-line="32" selection-start-column="53" selection-end-line="32" selection-end-column="53" />
+              <caret line="48" column="29" lean-forward="true" selection-start-line="48" selection-start-column="29" selection-end-line="48" selection-end-column="29" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="method#createGupDataset#0;class#GupLoader#0" expanded="false" />
+                <element signature="method#createPayloadDataset#0;class#GupLoader#0" expanded="false" />
+                <element signature="method#createDeviceSettingsDataset#0;class#GupLoader#0" expanded="false" />
+                <element signature="method#createGlobalSettingsDataset#0;class#GupLoader#0" expanded="false" />
+                <element signature="method#createPresetsDataset#0;class#GupLoader#0" expanded="false" />
+                <element signature="method#createProfileInfosDataset#0;class#GupLoader#0" expanded="false" />
+                <element signature="method#createGupRecentPlaysCreateRequestsDataset#0;class#GupLoader#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -50,6 +50,10 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>0d1d2b43-b47e-4544-b153-9a98cae949ef,A5BE7702-B378-4CBC-AD0E-AC10F7043082,AutoDownload,off</find>
+      <find>A5BE7702-B378-4CBC-AD0E-AC10F7043082,AutoPlay,off</find>
+      <find>3DD6C577125DA79A1A8AF29052D20461,123f7d39-c99f-2f01-7900-0d4b8b010cb7,,live,,,add,howardstern100,2017-07-06T17:33:37.566+0000,1,1,2017-07-06T17:33:37.566+0000,</find>
+      <find>profileInfos</find>
+      <find>gupRecentPlaysCreateRequests</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -74,8 +78,9 @@
         <option value="$PROJECT_DIR$/simple_employees.json" />
         <option value="$PROJECT_DIR$/src/main/java/com/ganesh/test/Employee.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/ganesh/test/Address.java" />
-        <option value="$PROJECT_DIR$/gupProfiles.json" />
         <option value="$PROJECT_DIR$/src/main/java/com/ganesh/test/EmployeeLoader.java" />
+        <option value="$PROJECT_DIR$/gupProfiles.json" />
+        <option value="$PROJECT_DIR$/gupProfiles-copy.json" />
         <option value="$PROJECT_DIR$/src/main/java/com/ganesh/test/GUPStructure.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/ganesh/test/GupLoader.java" />
       </list>
@@ -131,6 +136,32 @@
             <path>
               <item name="spark-java" type="b2602c69:ProjectViewProjectNode" />
               <item name="JsonHive" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="spark-java" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JsonHive" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="spark-java" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JsonHive" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="spark-java" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JsonHive" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="spark-java" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JsonHive" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -391,12 +422,12 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17784877" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27704194" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.52869755" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22737306" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12353568" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15814696" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -647,28 +678,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gupProfiles-copy.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gupProfiles.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="3322" column="0" lean-forward="true" selection-start-line="3322" selection-start-column="0" selection-end-line="3322" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/ganesh/test/SaveToCSV.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="214">
           <caret line="66" column="0" lean-forward="false" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -707,16 +722,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ganesh/test/GUPStructure.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="51" column="92" lean-forward="false" selection-start-line="51" selection-start-column="92" selection-end-line="51" selection-end-column="92" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/deviceSettings.csv/part-00167-429b39bb-1234-4b32-8cc8-418d16534614.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -741,12 +746,110 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/deviceSettings.csv/part-00000-ab6bf36e-0ca9-4fda-ac77-46be3d0c3b4d.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="82" lean-forward="true" selection-start-line="10" selection-start-column="82" selection-end-line="10" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/globalSettings.csv/part-00000-2af1814f-777e-41c6-9bcb-44b19b144585.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/presets.csv/part-00000-7dc5f51b-062a-4097-b93a-bbb23e1be6e6.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="47" column="99" lean-forward="false" selection-start-line="39" selection-start-column="84" selection-end-line="47" selection-end-column="99" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/profileInfos.csv/part-00000-d17cf20a-80e3-4c9a-8d9d-b79d75568b96.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/profileInfos.csv/part-00000-a8e6cdb9-7eb8-4860-99c1-517ffcdaa073.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gupProfiles.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="365" column="55" lean-forward="false" selection-start-line="365" selection-start-column="0" selection-end-line="366" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gupProfiles-copy.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gupRecentPlaysCreateRequests.csv/part-00000-685c303f-135d-4856-a8d9-5b5b24d2178a.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="82" lean-forward="true" selection-start-line="16" selection-start-column="82" selection-end-line="16" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gupPayloads.csv/part-00000-8a5ab1fb-4e84-41d1-adf0-cf92f059f011.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-48086">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gupSettings.csv/part-00000-e5639727-71ff-484f-8f6a-0d2d9a5d1eec.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-56209">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ganesh/test/GUPStructure.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1150">
+          <caret line="182" column="0" lean-forward="false" selection-start-line="182" selection-start-column="0" selection-end-line="182" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#createDeviceSettingsElements#0;class#GUPStructure#0" expanded="false" />
+            <element signature="method#createGlobalSettingsElements#0;class#GUPStructure#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/ganesh/test/GupLoader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
-          <caret line="32" column="53" lean-forward="true" selection-start-line="32" selection-start-column="53" selection-end-line="32" selection-end-column="53" />
+          <caret line="48" column="29" lean-forward="true" selection-start-line="48" selection-start-column="29" selection-end-line="48" selection-end-column="29" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#createGupDataset#0;class#GupLoader#0" expanded="false" />
+            <element signature="method#createPayloadDataset#0;class#GupLoader#0" expanded="false" />
+            <element signature="method#createDeviceSettingsDataset#0;class#GupLoader#0" expanded="false" />
+            <element signature="method#createGlobalSettingsDataset#0;class#GupLoader#0" expanded="false" />
+            <element signature="method#createPresetsDataset#0;class#GupLoader#0" expanded="false" />
+            <element signature="method#createProfileInfosDataset#0;class#GupLoader#0" expanded="false" />
+            <element signature="method#createGupRecentPlaysCreateRequestsDataset#0;class#GupLoader#0" expanded="false" />
           </folding>
         </state>
       </provider>

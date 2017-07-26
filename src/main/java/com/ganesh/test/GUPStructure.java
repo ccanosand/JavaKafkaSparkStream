@@ -54,6 +54,11 @@ public class GUPStructure {
         payLoadFields.add(DataTypes.createStructField("storageRevision", DataTypes.StringType, true));
 
         payLoadFields.add(DataTypes.createStructField("deviceSettings", createDeviceSettingsElements(), true));
+        payLoadFields.add(DataTypes.createStructField("globalSettings", createGlobalSettingsElements(), true));
+        payLoadFields.add(DataTypes.createStructField("presets", createPresetsElements(), true));
+        payLoadFields.add(DataTypes.createStructField("profileInfos", createprofileInfoElements(), true));
+        payLoadFields.add(DataTypes.createStructField("gupRecentPlaysCreateRequests", createGupRecentPlaysCreateRequestsElements(), true));
+
 
         StructType payloadStruct = DataTypes.createStructType(payLoadFields);
         return payloadStruct;
@@ -69,12 +74,128 @@ public class GUPStructure {
         deviceSettingFields.add(DataTypes.createStructField("settingValue", DataTypes.StringType, true));
         StructType deviceSettingStruct = DataTypes.createStructType(deviceSettingFields);
 
-        //ArrayType addressStruct = DataTypes.createArrayType( DataTypes.createStructType(addressFields));
-        //employeeFields.add(DataTypes.createStructField("addresses", addressStruct, true));
         ArrayType deviceSettingsStruct = DataTypes.createArrayType(deviceSettingStruct);
         return deviceSettingsStruct;
 
     }
 
+    public static ArrayType createGlobalSettingsElements(){
+
+        List<StructField> globalSettingFields = new ArrayList<>();
+
+        globalSettingFields.add(DataTypes.createStructField("gupId", DataTypes.StringType, true));
+        globalSettingFields.add(DataTypes.createStructField("settingName", DataTypes.StringType, true));
+        globalSettingFields.add(DataTypes.createStructField("settingValue", DataTypes.StringType, true));
+        StructType deviceSettingStruct = DataTypes.createStructType(globalSettingFields);
+
+        ArrayType deviceSettingsStruct = DataTypes.createArrayType(deviceSettingStruct);
+        return deviceSettingsStruct;
+
+    }
+
+    public static ArrayType createPresetsElements(){
+
+        List<StructField> presetFields = new ArrayList<>();
+
+        presetFields.add(DataTypes.createStructField("assetGUID", DataTypes.StringType, true));
+        presetFields.add(DataTypes.createStructField("assetName", DataTypes.StringType, true));
+        presetFields.add(DataTypes.createStructField("assetType", DataTypes.StringType, true));
+        presetFields.add(DataTypes.createStructField("autoDownload", DataTypes.BooleanType, true));
+        presetFields.add(DataTypes.createStructField("caId", DataTypes.StringType, true));
+        presetFields.add(DataTypes.createStructField("changeType", DataTypes.StringType, true));
+        presetFields.add(DataTypes.createStructField("channelId", DataTypes.StringType, true));
+        presetFields.add(DataTypes.createStructField("createdDateTime", DataTypes.StringType, true));
+        presetFields.add(DataTypes.createStructField("globalSortOrder", DataTypes.LongType, true));
+        presetFields.add(DataTypes.createStructField("legacySortOrder", DataTypes.LongType, true));
+        presetFields.add(DataTypes.createStructField("modifiedDateTime", DataTypes.StringType, true));
+        presetFields.add(DataTypes.createStructField("showDateTime", DataTypes.StringType, true));
+
+        StructType presetStruct = DataTypes.createStructType(presetFields);
+        ArrayType presetsStruct = DataTypes.createArrayType(presetStruct);
+        return presetsStruct;
+
+    }
+
+    public static StructType createRecentPlayStruct(){
+        List<StructField> fields = new ArrayList<>();
+
+        fields.add(DataTypes.createStructField("aodDownload", DataTypes.BooleanType, true));
+        fields.add(DataTypes.createStructField("aodPercentConsumed", DataTypes.LongType, true));
+        fields.add(DataTypes.createStructField("assetGUID", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("assetName", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("assetType", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("channelId", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("deviceId", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("endDateTime", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("endStreamDateTime", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("endStreamTime", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("recentPlayId", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("recentPlayType", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("startDateTime", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("startStreamDateTime", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("startStreamTime", DataTypes.StringType, true));
+
+        StructType recentPlayStruct = DataTypes.createStructType(fields);
+        return recentPlayStruct;
+    }
+
+    public static ArrayType createGupRecentPlaysCreateRequestsElements(){
+
+       /* List<StructField> fields = new ArrayList<>();
+
+        fields.add(DataTypes.createStructField("aodDownload", DataTypes.BooleanType, true));
+        fields.add(DataTypes.createStructField("aodPercentConsumed", DataTypes.LongType, true));
+        fields.add(DataTypes.createStructField("assetGUID", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("assetName", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("assetType", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("channelId", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("deviceId", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("endDateTime", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("endStreamDateTime", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("endStreamTime", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("recentPlayId", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("recentPlayType", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("startDateTime", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("startStreamDateTime", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("startStreamTime", DataTypes.StringType, true));
+
+        StructType recentPlayStruct = DataTypes.createStructType(fields);
+
+        List<StructField> recentPlayFileds = new ArrayList<>();
+        fields.add(DataTypes.createStructField("recentPlay", DataTypes.StringType, true));
+
+        StructType struct = DataTypes.createStructType(recentPlayFileds);
+
+        ArrayType arrayType = DataTypes.createArrayType(struct);
+        return arrayType;*/
+
+
+        List<StructField> fields = new ArrayList<>();
+        fields.add(DataTypes.createStructField("recentPlay", createRecentPlayStruct(), true));
+
+        StructType struct = DataTypes.createStructType(fields);
+        ArrayType arrayStruct = DataTypes.createArrayType(struct);
+        return arrayStruct;
+
+    }
+
+    public static ArrayType createprofileInfoElements(){
+
+        List<StructField> fields = new ArrayList<>();
+
+        fields.add(DataTypes.createStructField("createdDateTime", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("deleted", DataTypes.BooleanType, true));
+        fields.add(DataTypes.createStructField("encoding", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("gupId", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("modifiedDateTime", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("name", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("source", DataTypes.StringType, true));
+        fields.add(DataTypes.createStructField("value", DataTypes.StringType, true));
+
+        StructType struct = DataTypes.createStructType(fields);
+        ArrayType arrayStruct = DataTypes.createArrayType(struct);
+        return arrayStruct;
+
+    }
 
 }
