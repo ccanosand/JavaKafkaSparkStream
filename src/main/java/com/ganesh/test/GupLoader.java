@@ -22,7 +22,7 @@ public class GupLoader {
         String master = "local[*]";
 
         SparkSession sparkSession = SparkSession
-                .builder().appName(SaveToCSV.class.getName())
+                .builder().appName(GupLoader.class.getName())
                 .master(master).getOrCreate();
 
         SparkContext context = sparkSession.sparkContext();
