@@ -28,15 +28,9 @@ public class EmployeeLoader {
         addressFields.add(DataTypes.createStructField("city", DataTypes.StringType, true));
         addressFields.add(DataTypes.createStructField("state", DataTypes.StringType, true));
         addressFields.add(DataTypes.createStructField("zip", DataTypes.StringType, true));
-
         ArrayType addressStruct = DataTypes.createArrayType( DataTypes.createStructType(addressFields));
 
-        //StructType addressStruct = DataTypes.createStructType(addressFields);
-
         employeeFields.add(DataTypes.createStructField("addresses", addressStruct, true));
-
-        //employeeFields.add(DataTypes.createStructField("addresses", DataTypes.createStructType(addressFields), true));
-
         StructType employeeSchema = DataTypes.createStructType(employeeFields);
 
         SparkSession sparkSession = SparkSession
@@ -48,18 +42,22 @@ public class EmployeeLoader {
 
         SQLContext sqlCtx = sparkSession.sqlContext();
 
-        Encoder<Employee> employeeEncoder = Encoders.bean(Employee.class);
+        sparkSession.read()
+                //.option("inferSchema", "false")
+                //.schema(employeeSchema)
+                .json("simple_employees.json")
+                .printSchema();
+
+        /*Encoder<Employee> employeeEncoder = Encoders.bean(Employee.class);
 
         Dataset<Employee>  rowDataset = sparkSession.read()
                 .option("inferSchema", "false")
                 .schema(employeeSchema)
                 .json("simple_employees.json").as(employeeEncoder);
-        //Dataset<GupRecord> rowDataset = sqlCtx.jsonFile("gupProfiles.json").as(gupRecordEncoder);
-        //rowDataset.show();
 
         rowDataset.createOrReplaceTempView("employeeView");
 
-        sqlCtx.sql("select * from employeeView").show();
+        sqlCtx.sql("select * from employeeView").show();*/
 
         sparkSession.close();
 

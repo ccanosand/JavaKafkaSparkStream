@@ -31,13 +31,36 @@ public class GupLoader {
 
         SQLContext sqlCtx = sparkSession.sqlContext();
 
-        /*Dataset<Row> rowDataset = sqlCtx.jsonFile("gupProfiles.json");
-        rowDataset.printSchema();
-        rowDataset.createOrReplaceTempView("gupView");
+        Dataset<Row> gupDataset = sparkSession.read()
+                .option("inferSchema", "false")
+                .schema(GUPStructure.getGupSchema())
+                .json("gupProfiles.json");
 
-        sqlCtx.sql("select * from gupView").show();*/
+        gupDataset.printSchema();
+        gupDataset.createOrReplaceTempView("gupView");
 
-        Encoder<GupRecord> gupRecordEncoder = Encoders.bean(GupRecord.class);
+        Dataset<Row> deviceSettingsRecords =
+                sqlCtx.sql("select payload.deviceSettings as deviceSettings from gupView " );
+                        //+ "where payload.deviceSettings is not null");
+        deviceSettingsRecords.show();
+
+        Dataset<Row> explodedRecords = deviceSettingsRecords.withColumn( "deviceSetting",
+                org.apache.spark.sql.functions.explode(deviceSettingsRecords.col("deviceSettings")));
+        explodedRecords.createOrReplaceTempView("explodedDeviceSettingsView");
+        sqlCtx.sql("select deviceSetting.deviceId, deviceSetting.gupId, deviceSetting.settingName, " +
+                "deviceSetting.settingValue from explodedDeviceSettingsView")
+                .write().format("com.databricks.spark.csv")
+                .option("header","true")
+                .save("deviceSettings.csv");
+
+        /*Dataset<Row> explodedRecords = gupDataset.withColumn( "deviceSetting",
+                org.apache.spark.sql.functions.explode(gupDataset.col("payload.deviceSettings")));
+        explodedRecords.createOrReplaceTempView("explodedDeviceSettingsView");
+
+        sqlCtx.sql("select * from explodedDeviceSettingsView").
+                write().format("com.databricks.spark.csv").save("table1.csv");*/
+
+        /*Encoder<GupRecord> gupRecordEncoder = Encoders.bean(GupRecord.class);
 
         Dataset<GupRecord>  rowDataset = sparkSession.read().json("gupProfiles.json").as(gupRecordEncoder);
         //Dataset<GupRecord> rowDataset = sqlCtx.jsonFile("gupProfiles.json").as(gupRecordEncoder);
@@ -45,7 +68,7 @@ public class GupLoader {
 
         rowDataset.createOrReplaceTempView("gupView");
 
-        sqlCtx.sql("select payload.presets, payload.gupRecentPlaysCreateRequests from gupView").show();
+        sqlCtx.sql("select payload.presets, payload.gupRecentPlaysCreateRequests from gupView").show();*/
 
         sparkSession.close();
 
