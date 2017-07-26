@@ -38,14 +38,13 @@ public class GupLoader {
 
         gupDataset.printSchema();
         gupDataset.createOrReplaceTempView("gupView");
-
+/*
         Dataset<Row> deviceSettingsRecords =
-                sqlCtx.sql("select payload.deviceSettings as deviceSettings from gupView " );
-                        //+ "where payload.deviceSettings is not null");
-        deviceSettingsRecords.show();
+                sqlCtx.sql("select payload.deviceSettings from gupView " );
+        deviceSettingsRecords.show();*/
 
-        Dataset<Row> explodedRecords = deviceSettingsRecords.withColumn( "deviceSetting",
-                org.apache.spark.sql.functions.explode(deviceSettingsRecords.col("deviceSettings")));
+        Dataset<Row> explodedRecords = gupDataset.withColumn( "deviceSetting",
+                org.apache.spark.sql.functions.explode(gupDataset.col("payload.deviceSettings")));
         explodedRecords.createOrReplaceTempView("explodedDeviceSettingsView");
         sqlCtx.sql("select deviceSetting.deviceId, deviceSetting.gupId, deviceSetting.settingName, " +
                 "deviceSetting.settingValue from explodedDeviceSettingsView")
