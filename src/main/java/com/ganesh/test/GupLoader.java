@@ -18,7 +18,6 @@ public class GupLoader {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GupLoader.class);
 
-
     public static void main(String[] args) throws AnalysisException {
         String master = "local[*]";
 
@@ -38,21 +37,23 @@ public class GupLoader {
 
         gupDataset.printSchema();
         gupDataset.createOrReplaceTempView("gupView");
-/*
-        Dataset<Row> deviceSettingsRecords =
+
+        createDeviceSettingsDataset(gupDataset, sqlCtx);
+
+        /* Dataset<Row> deviceSettingsRecords =
                 sqlCtx.sql("select payload.deviceSettings from gupView " );
         deviceSettingsRecords.show();*/
 
-        Dataset<Row> explodedRecords = gupDataset.withColumn( "deviceSetting",
+        /*Dataset<Row> explodedRecords = gupDataset.withColumn("deviceSetting",
                 org.apache.spark.sql.functions.explode(gupDataset.col("payload.deviceSettings")));
         explodedRecords.createOrReplaceTempView("explodedDeviceSettingsView");
         sqlCtx.sql("select deviceSetting.deviceId, deviceSetting.gupId, deviceSetting.settingName, " +
                 "deviceSetting.settingValue from explodedDeviceSettingsView")
                 .write().format("com.databricks.spark.csv")
-                .option("header","true")
+                .option("header", "true")
                 .save("deviceSettings.csv");
 
-        /*Dataset<Row> explodedRecords = gupDataset.withColumn( "deviceSetting",
+        Dataset<Row> explodedRecords = gupDataset.withColumn( "deviceSetting",
                 org.apache.spark.sql.functions.explode(gupDataset.col("payload.deviceSettings")));
         explodedRecords.createOrReplaceTempView("explodedDeviceSettingsView");
 
@@ -71,6 +72,18 @@ public class GupLoader {
 
         sparkSession.close();
 
+    }
+
+    public static void createDeviceSettingsDataset(Dataset<Row> gupDataset, SQLContext sqlCtx) {
+
+        Dataset<Row> explodedRecords = gupDataset.withColumn("deviceSetting",
+                org.apache.spark.sql.functions.explode(gupDataset.col("payload.deviceSettings")));
+        explodedRecords.createOrReplaceTempView("explodedDeviceSettingsView");
+        sqlCtx.sql("select deviceSetting.deviceId, deviceSetting.gupId, deviceSetting.settingName, " +
+                "deviceSetting.settingValue from explodedDeviceSettingsView")
+                .write().format("com.databricks.spark.csv")
+                .option("header", "true")
+                .save("deviceSettings.csv");
     }
 
 }
