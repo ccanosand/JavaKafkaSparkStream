@@ -25,11 +25,9 @@ public class ConnectToHive {
                 .master(master).getOrCreate();
 
         SparkContext context = sparkSession.sparkContext();
-        context.setLogLevel("ERROR");
+        //context.setLogLevel("ERROR");
 
         SQLContext sqlCtx = sparkSession.sqlContext();
-
-
         //HiveContext hiveContext = new HiveContext(sparkSession);
         //hiveContext.setConf("spark.sql.warehouse.dir", "hdfs://quickstart.cloudera:9000/user/hive/warehouse");
 
