@@ -64,7 +64,7 @@ public class GUPStructure {
         return payloadStruct;
     }
 
-    public static ArrayType createDeviceSettingsElements(){
+    public static ArrayType createDeviceSettingsElements() {
 
         List<StructField> deviceSettingFields = new ArrayList<>();
 
@@ -79,7 +79,7 @@ public class GUPStructure {
 
     }
 
-    public static ArrayType createGlobalSettingsElements(){
+    public static ArrayType createGlobalSettingsElements() {
 
         List<StructField> globalSettingFields = new ArrayList<>();
 
@@ -93,7 +93,7 @@ public class GUPStructure {
 
     }
 
-    public static ArrayType createPresetsElements(){
+    public static ArrayType createPresetsElements() {
 
         List<StructField> presetFields = new ArrayList<>();
 
@@ -116,7 +116,7 @@ public class GUPStructure {
 
     }
 
-    public static StructType createRecentPlayStruct(){
+    public static StructType createRecentPlayStruct() {
         List<StructField> fields = new ArrayList<>();
 
         fields.add(DataTypes.createStructField("aodDownload", DataTypes.BooleanType, true));
@@ -139,36 +139,7 @@ public class GUPStructure {
         return recentPlayStruct;
     }
 
-    public static ArrayType createGupRecentPlaysCreateRequestsElements(){
-
-       /* List<StructField> fields = new ArrayList<>();
-
-        fields.add(DataTypes.createStructField("aodDownload", DataTypes.BooleanType, true));
-        fields.add(DataTypes.createStructField("aodPercentConsumed", DataTypes.LongType, true));
-        fields.add(DataTypes.createStructField("assetGUID", DataTypes.StringType, true));
-        fields.add(DataTypes.createStructField("assetName", DataTypes.StringType, true));
-        fields.add(DataTypes.createStructField("assetType", DataTypes.StringType, true));
-        fields.add(DataTypes.createStructField("channelId", DataTypes.StringType, true));
-        fields.add(DataTypes.createStructField("deviceId", DataTypes.StringType, true));
-        fields.add(DataTypes.createStructField("endDateTime", DataTypes.StringType, true));
-        fields.add(DataTypes.createStructField("endStreamDateTime", DataTypes.StringType, true));
-        fields.add(DataTypes.createStructField("endStreamTime", DataTypes.StringType, true));
-        fields.add(DataTypes.createStructField("recentPlayId", DataTypes.StringType, true));
-        fields.add(DataTypes.createStructField("recentPlayType", DataTypes.StringType, true));
-        fields.add(DataTypes.createStructField("startDateTime", DataTypes.StringType, true));
-        fields.add(DataTypes.createStructField("startStreamDateTime", DataTypes.StringType, true));
-        fields.add(DataTypes.createStructField("startStreamTime", DataTypes.StringType, true));
-
-        StructType recentPlayStruct = DataTypes.createStructType(fields);
-
-        List<StructField> recentPlayFileds = new ArrayList<>();
-        fields.add(DataTypes.createStructField("recentPlay", DataTypes.StringType, true));
-
-        StructType struct = DataTypes.createStructType(recentPlayFileds);
-
-        ArrayType arrayType = DataTypes.createArrayType(struct);
-        return arrayType;*/
-
+    public static ArrayType createGupRecentPlaysCreateRequestsElements() {
 
         List<StructField> fields = new ArrayList<>();
         fields.add(DataTypes.createStructField("recentPlay", createRecentPlayStruct(), true));
@@ -179,7 +150,7 @@ public class GUPStructure {
 
     }
 
-    public static ArrayType createprofileInfoElements(){
+    public static ArrayType createprofileInfoElements() {
 
         List<StructField> fields = new ArrayList<>();
 

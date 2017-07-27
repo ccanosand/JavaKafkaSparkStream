@@ -24,7 +24,6 @@ public class GupLoader {
         SparkSession sparkSession = SparkSession
                 .builder().appName(GupLoader.class.getName())
                 .master(master).getOrCreate();
-
         SparkContext context = sparkSession.sparkContext();
         context.setLogLevel("ERROR");
 
@@ -89,6 +88,7 @@ public class GupLoader {
     }
 
     public static void createDeviceSettingsDataset(Dataset<Row> gupDataset, SQLContext sqlCtx) {
+
 
         Dataset<Row> explodedRecords = gupDataset.withColumn("deviceSetting",
                 org.apache.spark.sql.functions.explode(gupDataset.col("payload.deviceSettings")));
