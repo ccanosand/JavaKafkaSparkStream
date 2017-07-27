@@ -4,6 +4,7 @@ import org.apache.spark.SparkContext;
 import org.apache.spark.sql.*;
 import org.apache.spark.sql.streaming.ProcessingTime;
 
+import java.util.UUID;
 import java.util.regex.Pattern;
 
 public final class GupKafkaProcessor {
@@ -26,15 +27,194 @@ public final class GupKafkaProcessor {
                 .option("subscribe", topics).load();
         rawDataSet = rawDataSet.withColumn("strValue", rawDataSet.col("value").cast("string"));
         rawDataSet = rawDataSet.withColumn("guprecord",
-                functions.from_json(
-                        rawDataSet.col("strValue"),
-                        GUPStructure.getGupSchema()));
-        //EmployeeMessageStructure.getEmployeeSchema()));
-        rawDataSet.createOrReplaceTempView("processedView");
-        Dataset<Row> processedDataset = sqlContext.sql("select * from processedView");
+                functions.from_json(rawDataSet.col("strValue"),GUPStructure.getGupSchema()));
+        rawDataSet.createOrReplaceTempView("gupView");
 
+        /*Dataset<Row> processedDataset = sqlContext.sql("select * from gupView");
+        Dataset<Row> processedDataset1 = sqlContext.sql("select " +
+                "strValue, guprecord.gupId, guprecord.action  " +
+                "from gupView");
+
+        processedDataset1.writeStream()
+                .format("com.databricks.spark.csv")
+                .option("header", "true")
+                .option("path", "temp_" + UUID.randomUUID().toString())
+                .option("checkpointLocation", "cp/" + UUID.randomUUID().toString())
+                .trigger(ProcessingTime.create("10 seconds"))
+                .start();*/
+
+        createGupDataset(sqlContext);
+
+        Dataset<Row> processedDataset = sqlContext.sql("select * from gupView");
         processedDataset.writeStream()
-                .format("console").trigger(ProcessingTime.create("10 seconds")).start()
+                .format("console").trigger(ProcessingTime.create("10 seconds"))
+                .start()
                 .awaitTermination();
+
+        System.out.println("Await termiation");
+    }
+
+    public static void createGupDataset(SQLContext sqlCtx) {
+
+        sqlCtx.sql("select  "
+                + "  guprecord.gupId ,   "
+                + "  guprecord.actionDateTime ,  "
+                + "  guprecord.dealerDemo ,  "
+                + "  guprecord.deviceId ,  "
+                + "  guprecord.action  ,  "
+                + "  guprecord.payloadName  "
+                + " from gupView")
+                .writeStream()
+                .format("com.databricks.spark.csv")
+                .option("header", "true")
+                .option("path", "gupDataset")
+                .option("checkpointLocation", "cp/" + UUID.randomUUID().toString())
+                .trigger(ProcessingTime.create("10 seconds"))
+                .start();
+    }
+
+    public static void createPayloadDataset(Dataset<Row> gupDataset, SQLContext sqlCtx) {
+
+        sqlCtx.sql("select  "
+                + "  guprecord.payload.active ,  "
+                + "  guprecord.payload.alertType ,  "
+                + "  guprecord.payload.assetGUID ,  "
+                + "  guprecord.payload.count ,  "
+                + "  guprecord.payload.deviceId ,  "
+                + "  guprecord.payload.lastSelectedTimestamp ,  "
+                + "  guprecord.payload.legacyId1 ,  "
+                + "  guprecord.payload.legacyId2 ,  "
+                + "  guprecord.payload.locationId ,  "
+                + "  guprecord.payload.moduleArea ,  "
+                + "  guprecord.payload.moduleGUID ,  "
+                + "  guprecord.payload.moduleType ,  "
+                + "  guprecord.payload.gupId ,  "
+                + "  guprecord.payload.stateData ,  "
+                + "  guprecord.payload.storageRevision  "
+                + " from gupView")
+                .writeStream()
+                .format("com.databricks.spark.csv")
+                .option("header", "true")
+                .option("path", "gupPayload")
+                .option("checkpointLocation", "cp/" + UUID.randomUUID().toString())
+                .trigger(ProcessingTime.create("10 seconds"))
+                .start();
+    }
+
+    public static void createDeviceSettingsDataset(Dataset<Row> gupDataset, SQLContext sqlCtx) {
+
+
+        Dataset<Row> explodedRecords = gupDataset.withColumn("deviceSetting",
+                org.apache.spark.sql.functions.explode(gupDataset.col("guprecord.payload.deviceSettings")));
+        explodedRecords.createOrReplaceTempView("explodedDeviceSettingsView");
+        sqlCtx.sql("select deviceSetting.deviceId, deviceSetting.gupId, deviceSetting.settingName, " +
+                "deviceSetting.settingValue from explodedDeviceSettingsView")
+                .writeStream()
+                .format("com.databricks.spark.csv")
+                .option("header", "true")
+                .option("path", "deviceSettings")
+                .option("checkpointLocation", "cp/" + UUID.randomUUID().toString())
+                .trigger(ProcessingTime.create("10 seconds"))
+                .start();
+    }
+
+    public static void createGlobalSettingsDataset(Dataset<Row> gupDataset, SQLContext sqlCtx) {
+
+        Dataset<Row> explodedRecords = gupDataset.withColumn("globalSetting",
+                org.apache.spark.sql.functions.explode(gupDataset.col("guprecord.payload.globalSettings")));
+        explodedRecords.createOrReplaceTempView("explodedGlobalSettingsView");
+        sqlCtx.sql("select globalSetting.gupId, globalSetting.settingName, " +
+                "globalSetting.settingValue from explodedGlobalSettingsView")
+                .writeStream()
+                .format("com.databricks.spark.csv")
+                .option("header", "true")
+                .option("path", "globalSettings")
+                .option("checkpointLocation", "cp/" + UUID.randomUUID().toString())
+                .trigger(ProcessingTime.create("10 seconds"))
+                .start();
+    }
+
+    public static void createPresetsDataset(Dataset<Row> gupDataset, SQLContext sqlCtx) {
+
+        Dataset<Row> explodedRecords = gupDataset.withColumn("preset",
+                org.apache.spark.sql.functions.explode(gupDataset.col("guprecord.payload.presets")));
+        explodedRecords.createOrReplaceTempView("explodedPresetsView");
+
+        sqlCtx.sql("select guprecord.gupId, preset.assetGUID, " +
+                "preset.assetName , " +
+                "preset.assetType , " +
+                "preset.autoDownload , " +
+                "preset.caId , " +
+                "preset.changeType , " +
+                "preset.channelId , " +
+                "preset.createdDateTime , " +
+                "preset.globalSortOrder , " +
+                "preset.legacySortOrder , " +
+                "preset.modifiedDateTime , " +
+                "preset.showDateTime  " +
+                "  from explodedPresetsView")
+                .writeStream()
+                .format("com.databricks.spark.csv")
+                .option("header", "true")
+                .option("path", "presets")
+                .option("checkpointLocation", "cp/" + UUID.randomUUID().toString())
+                .trigger(ProcessingTime.create("10 seconds"))
+                .start();
+    }
+
+    public static void createProfileInfosDataset(Dataset<Row> gupDataset, SQLContext sqlCtx) {
+
+        Dataset<Row> explodedRecords = gupDataset.withColumn("profileInfo",
+                org.apache.spark.sql.functions.explode(gupDataset.col("guprecord.payload.profileInfos")));
+        explodedRecords.createOrReplaceTempView("explodedProfileInfosView");
+
+        sqlCtx.sql("select " +
+                "profileInfo.createdDateTime , " +
+                "profileInfo.deleted , " +
+                "profileInfo.encoding , " +
+                "profileInfo.gupId , " +
+                "profileInfo.modifiedDateTime , " +
+                "profileInfo.name , " +
+                "profileInfo.source , " +
+                "profileInfo.value " +
+                "  from explodedProfileInfosView")
+                .writeStream()
+                .format("com.databricks.spark.csv")
+                .option("header", "true")
+                .option("path", "profileInfo")
+                .option("checkpointLocation", "cp/" + UUID.randomUUID().toString())
+                .trigger(ProcessingTime.create("10 seconds"))
+                .start();
+    }
+
+    public static void createGupRecentPlaysCreateRequestsDataset(Dataset<Row> gupDataset, SQLContext sqlCtx) {
+
+        Dataset<Row> explodedRecords = gupDataset.withColumn("gupRecentPlaysCreateRequest",
+                org.apache.spark.sql.functions.explode(gupDataset.col("guprecord.payload.gupRecentPlaysCreateRequests")));
+        explodedRecords.createOrReplaceTempView("explodedGupRecentPlaysCreateRequestsView");
+
+        sqlCtx.sql("select " +
+                " gupRecentPlaysCreateRequest.recentPlay.aodDownload ,  " +
+                " gupRecentPlaysCreateRequest.recentPlay.aodPercentConsumed ,  " +
+                " gupRecentPlaysCreateRequest.recentPlay.assetGUID ,  " +
+                " gupRecentPlaysCreateRequest.recentPlay.assetType ,  " +
+                " gupRecentPlaysCreateRequest.recentPlay.channelId ,  " +
+                " gupRecentPlaysCreateRequest.recentPlay.deviceId ,  " +
+                " gupRecentPlaysCreateRequest.recentPlay.endDateTime ,  " +
+                " gupRecentPlaysCreateRequest.recentPlay.endStreamDateTime ,  " +
+                " gupRecentPlaysCreateRequest.recentPlay.endStreamTime ,  " +
+                " gupRecentPlaysCreateRequest.recentPlay.recentPlayId ,  " +
+                " gupRecentPlaysCreateRequest.recentPlay.recentPlayType ,  " +
+                " gupRecentPlaysCreateRequest.recentPlay.startDateTime ,  " +
+                " gupRecentPlaysCreateRequest.recentPlay.startStreamDateTime ,  " +
+                " gupRecentPlaysCreateRequest.recentPlay.startStreamTime " +
+                "  from explodedGupRecentPlaysCreateRequestsView")
+                .writeStream()
+                .format("com.databricks.spark.csv")
+                .option("header", "true")
+                .option("path", "profileInfo")
+                .option("checkpointLocation", "cp/" + UUID.randomUUID().toString())
+                .trigger(ProcessingTime.create("10 seconds"))
+                .start();
     }
 }

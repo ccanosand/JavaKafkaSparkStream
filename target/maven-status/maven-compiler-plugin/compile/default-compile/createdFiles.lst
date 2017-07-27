@@ -1,0 +1,8 @@
+com/ganesh/test/JavaDirectKafkaTest.class
+com/ganesh/test/GupStream.class
+com/ganesh/test/GUPStructure.class
+com/ganesh/test/KafkaMessageStructure.class
+com/ganesh/test/EmployeeMessageStructure.class
+com/ganesh/test/GupKafkaProcessor.class
+com/ganesh/test/GupLoader.class
+com/ganesh/test/JavaDirectKafkaWordCount.class
