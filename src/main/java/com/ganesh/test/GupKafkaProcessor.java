@@ -30,28 +30,20 @@ public final class GupKafkaProcessor {
                 functions.from_json(rawDataSet.col("strValue"),GUPStructure.getGupSchema()));
         rawDataSet.createOrReplaceTempView("gupView");
 
-        /*Dataset<Row> processedDataset = sqlContext.sql("select * from gupView");
-        Dataset<Row> processedDataset1 = sqlContext.sql("select " +
-                "strValue, guprecord.gupId, guprecord.action  " +
-                "from gupView");
-
-        processedDataset1.writeStream()
-                .format("com.databricks.spark.csv")
-                .option("header", "true")
-                .option("path", "temp_" + UUID.randomUUID().toString())
-                .option("checkpointLocation", "cp/" + UUID.randomUUID().toString())
-                .trigger(ProcessingTime.create("10 seconds"))
-                .start();*/
-
         createGupDataset(sqlContext);
+        createPayloadDataset(rawDataSet, sqlContext);
+        createDeviceSettingsDataset(rawDataSet, sqlContext);
+        createGlobalSettingsDataset(rawDataSet, sqlContext);
+        createPresetsDataset(rawDataSet, sqlContext);
+        createProfileInfosDataset(rawDataSet, sqlContext);
+        createGupRecentPlaysCreateRequestsDataset(rawDataSet, sqlContext);
 
-        Dataset<Row> processedDataset = sqlContext.sql("select * from gupView");
+        Dataset<Row> processedDataset = sqlContext.sql("select 1 from gupView");
         processedDataset.writeStream()
-                .format("console").trigger(ProcessingTime.create("10 seconds"))
+                .format("console")
+                .trigger(ProcessingTime.create("10 seconds"))
                 .start()
                 .awaitTermination();
-
-        System.out.println("Await termiation");
     }
 
     public static void createGupDataset(SQLContext sqlCtx) {
@@ -67,7 +59,7 @@ public final class GupKafkaProcessor {
                 .writeStream()
                 .format("com.databricks.spark.csv")
                 .option("header", "true")
-                .option("path", "gupDataset")
+                .option("path", "output/gupDataset")
                 .option("checkpointLocation", "cp/" + UUID.randomUUID().toString())
                 .trigger(ProcessingTime.create("10 seconds"))
                 .start();
@@ -95,7 +87,7 @@ public final class GupKafkaProcessor {
                 .writeStream()
                 .format("com.databricks.spark.csv")
                 .option("header", "true")
-                .option("path", "gupPayload")
+                .option("path", "output/gupPayload")
                 .option("checkpointLocation", "cp/" + UUID.randomUUID().toString())
                 .trigger(ProcessingTime.create("10 seconds"))
                 .start();
@@ -112,7 +104,7 @@ public final class GupKafkaProcessor {
                 .writeStream()
                 .format("com.databricks.spark.csv")
                 .option("header", "true")
-                .option("path", "deviceSettings")
+                .option("path", "output/deviceSettings")
                 .option("checkpointLocation", "cp/" + UUID.randomUUID().toString())
                 .trigger(ProcessingTime.create("10 seconds"))
                 .start();
@@ -128,7 +120,7 @@ public final class GupKafkaProcessor {
                 .writeStream()
                 .format("com.databricks.spark.csv")
                 .option("header", "true")
-                .option("path", "globalSettings")
+                .option("path", "output/globalSettings")
                 .option("checkpointLocation", "cp/" + UUID.randomUUID().toString())
                 .trigger(ProcessingTime.create("10 seconds"))
                 .start();
@@ -156,7 +148,7 @@ public final class GupKafkaProcessor {
                 .writeStream()
                 .format("com.databricks.spark.csv")
                 .option("header", "true")
-                .option("path", "presets")
+                .option("path", "output/presets")
                 .option("checkpointLocation", "cp/" + UUID.randomUUID().toString())
                 .trigger(ProcessingTime.create("10 seconds"))
                 .start();
@@ -181,7 +173,7 @@ public final class GupKafkaProcessor {
                 .writeStream()
                 .format("com.databricks.spark.csv")
                 .option("header", "true")
-                .option("path", "profileInfo")
+                .option("path", "output/profileInfo")
                 .option("checkpointLocation", "cp/" + UUID.randomUUID().toString())
                 .trigger(ProcessingTime.create("10 seconds"))
                 .start();
@@ -212,7 +204,7 @@ public final class GupKafkaProcessor {
                 .writeStream()
                 .format("com.databricks.spark.csv")
                 .option("header", "true")
-                .option("path", "profileInfo")
+                .option("path", "output/gupRecentPlaysCreateRequest")
                 .option("checkpointLocation", "cp/" + UUID.randomUUID().toString())
                 .trigger(ProcessingTime.create("10 seconds"))
                 .start();
