@@ -12,7 +12,6 @@ public class GUPStructure {
 
     public static StructType getGupSchema() {
         List<StructField> rootFields = createRootElements();
-        //rootFields.add(DataTypes.createStructField("payload", createPayloadElements(), true));
         StructType gupSchema = DataTypes.createStructType(rootFields);
         return gupSchema;
     }
