@@ -45,8 +45,6 @@ public final class JavaDirectKafkaTest {
                 .format("kafka")
                 .option("kafka.bootstrap.servers", brokers)
                 .option("subscribe", topics)
-                //.option("startingOffsets", "earliest")
-                //.schema(KafkaMessageStructure.getKafkaSchema())
                 .load();
 
         ds1.printSchema();
